@@ -6,6 +6,7 @@ import { UserServices } from "./user.service";
 const router = express.Router();
 router.post("/", userController.createUser);
 router.get("/", userController.getAllUsers);
+router.get("/:userId", userController.getSingleUser);
 // router.post("/create-student", StudentControllers.createStudent);
 
 // router.get("/:studentId", StudentControllers.getSingleStudent);
