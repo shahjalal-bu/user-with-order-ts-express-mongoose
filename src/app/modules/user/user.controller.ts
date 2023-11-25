@@ -7,7 +7,6 @@ const createUser = async (req: Request, res: Response) => {
   try {
     const userData = req.body;
     const zodParsedData = userValidationSchema.parse(userData);
-    console.log(zodParsedData);
     const result = await UserServices.createUser(zodParsedData);
     res.status(200).json({
       success: true,
