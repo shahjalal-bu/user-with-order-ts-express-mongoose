@@ -95,5 +95,5 @@ export const userController = {
   getAllUsers,
   getSingleUser,
   updateUser,
-  deleteUser
+  deleteUser,
 };
