@@ -45,7 +45,7 @@ This repository contains the source code for a TypeScript-based Express.js API w
 
    The server will run on which set in env.
 
-   6. Host link
+6. Host link
 
    ```
    https://user-with-order-ts-express-mongoose.vercel.app
