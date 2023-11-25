@@ -1,37 +1,37 @@
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
 
-import { Schema, model } from "mongoose";
-import config from "../../config";
+import { Schema, model } from 'mongoose';
+import config from '../../config';
 import {
   TAddress,
   TOrder,
   TUser,
   TUserFullName,
   UserModel,
-} from "./user.interface";
+} from './user.interface';
 
 const userFullNameSchema = new Schema<TUserFullName>({
   firstName: {
     type: String,
-    required: [true, "First name is required"],
+    required: [true, 'First name is required'],
   },
   lastName: {
     type: String,
-    required: [true, "Last name is required"],
+    required: [true, 'Last name is required'],
   },
 });
 const addressSchema = new Schema<TAddress>({
   street: {
     type: String,
-    required: [true, "Street is required"],
+    required: [true, 'Street is required'],
   },
   city: {
     type: String,
-    required: [true, "City is required"],
+    required: [true, 'City is required'],
   },
   country: {
     type: String,
-    required: [true, "Country is required"],
+    required: [true, 'Country is required'],
   },
 });
 const orderSchema = new Schema<TOrder>({
@@ -40,29 +40,29 @@ const orderSchema = new Schema<TOrder>({
   quantity: Number,
 });
 const userSchema = new Schema<TUser, UserModel>({
-  userId: { type: Number, required: [true, "ID is required"], unique: true },
+  userId: { type: Number, required: [true, 'ID is required'], unique: true },
   username: {
     type: String,
-    required: [true, "User Name is required"],
+    required: [true, 'User Name is required'],
     unique: true,
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
-    maxlength: [20, "Password can not be more than 20 characters"],
+    required: [true, 'Password is required'],
+    maxlength: [20, 'Password can not be more than 20 characters'],
     select: false,
   },
   fullName: {
     type: userFullNameSchema,
-    required: [true, "Name is required"],
+    required: [true, 'Name is required'],
   },
   age: {
     type: Number,
-    required: [true, "Age is required"],
+    required: [true, 'Age is required'],
   },
   email: {
     type: String,
-    required: [true, "Email is required"],
+    required: [true, 'Email is required'],
     unique: true,
   },
   isActive: {
@@ -86,19 +86,20 @@ const userSchema = new Schema<TUser, UserModel>({
 
 //hashed a password
 
-userSchema.pre("save", async function (next) {
+userSchema.pre('save', async function (next) {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
   user.password = await bcrypt.hash(
     user.password,
-    Number(config.bcrypt_salt_rounds)
+    Number(config.bcrypt_salt_rounds),
   );
   next();
 });
 
 //make password empty string
 
-userSchema.post("save", function (doc, next) {
-  doc.password = "";
+userSchema.post('save', function (doc, next) {
+  doc.password = '';
   next();
 });
 
@@ -107,4 +108,4 @@ userSchema.statics.isUserExists = async function (userId: number) {
   return existingUser;
 };
 
-export const User = model<TUser, UserModel>("User", userSchema);
+export const User = model<TUser, UserModel>('User', userSchema);

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const fullNameSchema = z.object({
   firstName: z
@@ -6,7 +6,7 @@ const fullNameSchema = z.object({
     .min(1)
     .max(20)
     .refine((value) => /^[A-Z]/.test(value), {
-      message: "First Name must start with a capital letter",
+      message: 'First Name must start with a capital letter',
     }),
   lastName: z.string(),
 });

@@ -1,7 +1,10 @@
-import { Request, Response } from "express";
-import { UserServices } from "./user.service";
-import { TOrder } from "./user.interface";
-import userValidationSchema, { orderValidationSchema } from "./user.validation";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Request, Response } from 'express';
+import { UserServices } from './user.service';
+import { TOrder } from './user.interface';
+import userValidationSchema, { orderValidationSchema } from './user.validation';
+
+//create a user
 
 const createUser = async (req: Request, res: Response) => {
   try {
@@ -10,17 +13,19 @@ const createUser = async (req: Request, res: Response) => {
     const result = await UserServices.createUser(zodParsedData);
     res.status(200).json({
       success: true,
-      message: "User is created successfully",
+      message: 'User is created successfully',
       data: result,
     });
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: error.message || "something went wrong",
+      message: error.message || 'something went wrong',
       error: error,
     });
   }
 };
+
+//get all user
 
 const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -28,34 +33,39 @@ const getAllUsers = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: "Users are retrieved successfully",
+      message: 'Users are retrieved successfully',
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "something went wrong",
+      message: err.message || 'something went wrong',
       error: err,
     });
   }
 };
+
+//get a user with userId
+
 const getSingleUser = async (req: Request, res: Response) => {
   try {
     const userId = +req.params.userId;
     const result = await UserServices.getSingleUser(userId);
     res.status(200).json({
       success: true,
-      message: "User fetched successfully!",
+      message: 'User fetched successfully!',
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "something went wrong",
+      message: err.message || 'something went wrong',
       error: err,
     });
   }
 };
+
+//update a user
 
 const updateUser = async (req: Request, res: Response) => {
   try {
@@ -65,34 +75,39 @@ const updateUser = async (req: Request, res: Response) => {
     const result = await UserServices.updateUser(userId, zodParsedData);
     res.status(200).json({
       success: true,
-      message: "User update successfully!",
+      message: 'User update successfully!',
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "something went wrong",
+      message: err.message || 'something went wrong',
       error: err,
     });
   }
 };
+
+//delete a user
+
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const userId = +req.params.userId;
     const result = await UserServices.deleteUser(userId);
     res.status(200).json({
       success: true,
-      message: "User deleted successfully!",
+      message: 'User deleted successfully!',
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "something went wrong",
+      message: err.message || 'something went wrong',
       error: err,
     });
   }
 };
+
+//add order to user
 
 const addOrderToUser = async (req: Request, res: Response) => {
   try {
@@ -102,13 +117,13 @@ const addOrderToUser = async (req: Request, res: Response) => {
     await UserServices.addOrderToUser(userId, zodParsedData);
     res.status(200).json({
       success: true,
-      message: "Order created successfully!",
+      message: 'Order created successfully!',
       data: null,
     });
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "something went wrong",
+      message: err.message || 'something went wrong',
       error: err,
     });
   }
@@ -120,13 +135,13 @@ const getOrderForUser = async (req: Request, res: Response) => {
     const result = await UserServices.getOrderForUser(userId);
     res.status(200).json({
       success: true,
-      message: "Order fetch successfully!",
+      message: 'Order fetch successfully!',
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "something went wrong",
+      message: err.message || 'something went wrong',
       error: err,
     });
   }
@@ -138,13 +153,13 @@ const getTotalPriceOfOrderForUser = async (req: Request, res: Response) => {
     const result = await UserServices.getTotalPriceOfOrderForUser(userId);
     res.status(200).json({
       success: true,
-      message: "Total price calculated successfully!",
+      message: 'Total price calculated successfully!',
       data: result,
     });
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || "something went wrong",
+      message: err.message || 'something went wrong',
       error: err,
     });
   }
