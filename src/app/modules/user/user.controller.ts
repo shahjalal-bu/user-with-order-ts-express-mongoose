@@ -110,6 +110,42 @@ const addOrderToUser = async (req: Request, res: Response) => {
   }
 };
 
+const getOrderForUser = async (req: Request, res: Response) => {
+  try {
+    const userId = +req.params.userId;
+    const result = await UserServices.getOrderForUser(userId);
+    res.status(200).json({
+      success: true,
+      message: "Order fetch successfully!",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "something went wrong",
+      error: err,
+    });
+  }
+};
+
+const getTotalPriceOfOrderForUser = async (req: Request, res: Response) => {
+  try {
+    const userId = +req.params.userId;
+    const result = await UserServices.getTotalPriceOfOrderForUser(userId);
+    res.status(200).json({
+      success: true,
+      message: "Total price calculated successfully!",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "something went wrong",
+      error: err,
+    });
+  }
+};
+
 export const userController = {
   createUser,
   getAllUsers,
@@ -117,4 +153,6 @@ export const userController = {
   updateUser,
   deleteUser,
   addOrderToUser,
+  getOrderForUser,
+  getTotalPriceOfOrderForUser,
 };
