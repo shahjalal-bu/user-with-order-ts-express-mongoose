@@ -18,8 +18,16 @@ const getSingleUser = async (userId: number) => {
   return result;
 };
 
+const updateUser = async (userId: number, updateData: TUser) => {
+  const result = await User.findOneAndUpdate({ userId }, updateData, {
+    new: true,
+  });
+  return result;
+};
+
 export const UserServices = {
   createUser,
   getAllUsers,
   getSingleUser,
+  updateUser,
 };
