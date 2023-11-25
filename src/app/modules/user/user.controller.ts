@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserServices } from "./user.service";
+import { TOrder } from "./user.interface";
 
 const createUser = async (req: Request, res: Response) => {
   try {
@@ -90,10 +91,30 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
+const addOrderToUser = async (req: Request, res: Response) => {
+  try {
+    const userId: number = +req.params.userId;
+    const order: TOrder = req.body;
+    const result = await UserServices.addOrderToUser(userId, order);
+    res.status(200).json({
+      success: true,
+      message: "Order created successfully!",
+      data: null,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "something went wrong",
+      error: err,
+    });
+  }
+};
+
 export const userController = {
   createUser,
   getAllUsers,
   getSingleUser,
   updateUser,
   deleteUser,
+  addOrderToUser,
 };
