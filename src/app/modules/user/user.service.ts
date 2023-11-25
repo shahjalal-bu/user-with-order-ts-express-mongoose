@@ -14,14 +14,28 @@ const getAllUsers = async () => {
   return result;
 };
 const getSingleUser = async (userId: number) => {
+  if (!(await User.isUserExists(userId))) {
+    throw new Error("User not exists!");
+  }
   const result = await User.find({ userId });
   return result;
 };
 
 const updateUser = async (userId: number, updateData: TUser) => {
+  if (!(await User.isUserExists(userId))) {
+    throw new Error("User not exists!");
+  }
   const result = await User.findOneAndUpdate({ userId }, updateData, {
     new: true,
   });
+  return result;
+};
+
+const deleteUser = async (userId: number) => {
+  if (!(await User.isUserExists(userId))) {
+    throw new Error("User not exists!");
+  }
+  const result = await User.deleteOne({ userId });
   return result;
 };
 
@@ -30,4 +44,5 @@ export const UserServices = {
   getAllUsers,
   getSingleUser,
   updateUser,
+  deleteUser,
 };

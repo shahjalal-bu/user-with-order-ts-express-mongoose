@@ -6,12 +6,6 @@ router.post("/", userController.createUser);
 router.get("/", userController.getAllUsers);
 router.get("/:userId", userController.getSingleUser);
 router.patch("/:userId", userController.updateUser);
-// router.post("/create-student", StudentControllers.createStudent);
-
-// router.get("/:studentId", StudentControllers.getSingleStudent);
-
-// router.delete("/:studentId", StudentControllers.deleteStudent);
-
-// router.get("/", StudentControllers.getAllStudents);
+router.delete("/:userId", userController.deleteUser);
 
 export const UserRoutes = router;
