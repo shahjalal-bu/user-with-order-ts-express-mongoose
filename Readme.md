@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the source code for a TypeScript-based Express.js API with MongoDB (using Mongoose) for managing users and orders. It includes authentication using bcrypt for password hashing, CORS support, and environment variable configuration through dotenv.
+This repository contains the source code for a TypeScript-based Express.js API with MongoDB (using Mongoose) for managing users and orders. It includes bcrypt for password hashing, CORS support, and environment variable configuration through dotenv.
 
 ## Getting Started
 
@@ -43,7 +43,14 @@ This repository contains the source code for a TypeScript-based Express.js API w
    npm run start:dev
    ```
 
-   The server will run on `http://localhost:3000`.
+   The server will run on which set in env.
+
+   6. Host link
+
+   ```
+   https://user-with-order-ts-express-mongoose.vercel.app/api/v1/users
+
+   ```
 
 ## Scripts
 
@@ -77,4 +84,3 @@ This repository contains the source code for a TypeScript-based Express.js API w
 ## License
 
 This project is licensed under the ISC License
-
