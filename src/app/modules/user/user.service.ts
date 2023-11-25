@@ -62,10 +62,10 @@ const getTotalPriceOfOrderForUser = async (userId: number) => {
   }
   const result = await User.find({ userId }, { orders: 1, _id: 0 });
   const allOrders = result[0]?.orders;
-  const totalPrice = allOrders.reduce((acc, cur) => {
+  const totalPrice = allOrders?.reduce((acc, cur) => {
     return acc + cur.price;
   }, 0);
-  return { totalPrice: totalPrice.toFixed(2) };
+  return { totalPrice: totalPrice?.toFixed(2) };
 };
 export const UserServices = {
   createUser,

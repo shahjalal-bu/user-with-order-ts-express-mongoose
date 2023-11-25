@@ -24,7 +24,7 @@ export type TUser = {
   isActive: boolean;
   hobbies: Array<string>;
   address: TAddress;
-  orders: Array<TOrder>;
+  orders?: Array<TOrder>;
 };
 
 export interface UserModel extends Model<TUser> {
