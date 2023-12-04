@@ -108,7 +108,6 @@ const deleteUser = async (req: Request, res: Response) => {
 };
 
 //add order to user
-
 const addOrderToUser = async (req: Request, res: Response) => {
   try {
     const userId: number = +req.params.userId;
@@ -129,6 +128,8 @@ const addOrderToUser = async (req: Request, res: Response) => {
   }
 };
 
+//get order for a user
+
 const getOrderForUser = async (req: Request, res: Response) => {
   try {
     const userId = +req.params.userId;
@@ -146,6 +147,8 @@ const getOrderForUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+//get total price of orders for a user
 
 const getTotalPriceOfOrderForUser = async (req: Request, res: Response) => {
   try {

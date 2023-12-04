@@ -1,7 +1,7 @@
 import { TOrder, TUser } from './user.interface';
 import { User } from './user.model';
 
-//create a user 
+//create a user
 const createUser = async (userData: TUser) => {
   if (await User.isUserExists(userData.userId)) {
     throw new Error('User already exists!');
@@ -10,10 +10,15 @@ const createUser = async (userData: TUser) => {
   return result;
 };
 
+//get all users
+
 const getAllUsers = async () => {
   const result = await User.find();
   return result;
 };
+
+//get a user
+
 const getSingleUser = async (userId: number) => {
   if (!(await User.isUserExists(userId))) {
     throw new Error('User not exists!');
@@ -21,6 +26,8 @@ const getSingleUser = async (userId: number) => {
   const result = await User.find({ userId });
   return result;
 };
+
+//update a user
 
 const updateUser = async (userId: number, updateData: TUser) => {
   if (!(await User.isUserExists(userId))) {
@@ -32,6 +39,8 @@ const updateUser = async (userId: number, updateData: TUser) => {
   return result;
 };
 
+//delete a user
+
 const deleteUser = async (userId: number) => {
   if (!(await User.isUserExists(userId))) {
     throw new Error('User not exists!');
@@ -39,6 +48,8 @@ const deleteUser = async (userId: number) => {
   const result = await User.deleteOne({ userId });
   return result;
 };
+
+//add order to user
 
 const addOrderToUser = async (userId: number, order: TOrder) => {
   if (!(await User.isUserExists(userId))) {
@@ -50,6 +61,9 @@ const addOrderToUser = async (userId: number, order: TOrder) => {
   );
   return result;
 };
+
+//get orders for a user
+
 const getOrderForUser = async (userId: number) => {
   if (!(await User.isUserExists(userId))) {
     throw new Error('User not exists!');
@@ -57,6 +71,9 @@ const getOrderForUser = async (userId: number) => {
   const result = await User.find({ userId }, { orders: 1, _id: 0 });
   return result;
 };
+
+//get total price of orders for a user
+
 const getTotalPriceOfOrderForUser = async (userId: number) => {
   if (!(await User.isUserExists(userId))) {
     throw new Error('User not exists!');
@@ -64,7 +81,7 @@ const getTotalPriceOfOrderForUser = async (userId: number) => {
   const result = await User.find({ userId }, { orders: 1, _id: 0 });
   const allOrders = result[0]?.orders;
   const totalPrice = allOrders?.reduce((acc, cur) => {
-    return acc + cur.price;
+    return acc + cur.price * cur.quantity;
   }, 0);
   return { totalPrice: totalPrice?.toFixed(2) };
 };

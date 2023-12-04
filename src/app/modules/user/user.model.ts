@@ -85,7 +85,6 @@ const userSchema = new Schema<TUser, UserModel>({
 });
 
 //hashed a password
-
 userSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
@@ -97,12 +96,11 @@ userSchema.pre('save', async function (next) {
 });
 
 //make password empty string
-
 userSchema.post('save', function (doc, next) {
   doc.password = '';
   next();
 });
-
+//check user already exists or not
 userSchema.statics.isUserExists = async function (userId: number) {
   const existingUser = await User.findOne({ userId });
   return existingUser;
